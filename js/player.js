@@ -1,75 +1,94 @@
 'use scrict'
 
-function Player(canvas){
-  this.posX = 1;
-  this.posY = 1;
-  this.bombsAvailable = 2;
-  this.rangeBombs = 3;
-  this.canvas = canvas;
-  this.ctx = this.canvas.getContext('2d');
-  this.bombermanImage = new Image();
-  this.deadBombermanImage = new Image();
-  this.groundImage = new Image();
-  this.fireImage = new Image();
+class Player {
 
-  this.bombermanImage.src = "./img/bomberman.gif";
-  this.deadBombermanImage.src = "./img/deadBomberman.png";
-  this.groundImage.src = "./img/ground.png";
-  this.fireImage.src = "./img/fire.png";
-}
+  constructor (canvas){
+    this.posX = 1;
+    this.posY = 1;
+    this.bombsAvailable = 2;
+    this.rangeBombs = 3;
+    this.canvas = canvas;
+    this.ctx = this.canvas.getContext('2d');
+    this.bombermanImage = new Image();
+    this.deadBombermanImage = new Image();
+    this.groundImage = new Image();
+    this.fireImage = new Image();
 
-Player.prototype.move = function(x, y){
+    this.bombermanImage.src = "./img/bomberman.gif";
+    this.deadBombermanImage.src = "./img/deadBomberman.png";
+    this.groundImage.src = "./img/ground.png";
+    this.fireImage.src = "./img/fire.png";
+  }
 
-  this.posX = x;
-  this.posY = y;
-}
 
-Player.prototype.nextPosition = function(direction) {
+  move (x, y){
 
-  let nextPositionY = this.posY;
-  let nextPositionX = this.posX;
-
-  switch(direction){
-
-    case 'U': nextPositionY--;  break;  //Up
-    case 'D': nextPositionY++;  break;  //Down
-    case 'R': nextPositionX++;  break;  //Rigth
-    case 'L': nextPositionX--;  break;  //Left
+    this.posX = x;
+    this.posY = y;
   }
   
-  return [nextPositionX , nextPositionY];
-}
-
-Player.prototype.addBombsAvailable = function (){
-
-  this.bombsAvailable++;
-}
-
-Player.prototype.reduceBombsAvailable = function (){    //TODO: REMOVE IT?
-
-  this.bombsAvailable--;
-}
-
-Player.prototype.addBombsRange = function (){
-
-  this.rangeBombs++;
-}
-
-Player.prototype.print = function () {
-
-  this.ctx.drawImage(this.bombermanImage, this.posX*32, this.posY*32, 32, 32);
-}
-
-Player.prototype.printDead = function (causeOfDeath) {
+  nextPosition (direction) {
   
-  if(causeOfDeath === 'fire'){
-
-    this.ctx.drawImage(this.fireImage, this.posX*32, this.posY*32, 32, 32);
-  }
-  else{
-
-    this.ctx.drawImage(this.groundImage, this.posX*32, this.posY*32, 32, 32);
+    let nextPositionY = this.posY;
+    let nextPositionX = this.posX;
+  
+    switch(direction){
+  
+      case 'U': nextPositionY--;  break;  //Up
+      case 'D': nextPositionY++;  break;  //Down
+      case 'R': nextPositionX++;  break;  //Rigth
+      case 'L': nextPositionX--;  break;  //Left
+    }
+    
+    return [nextPositionX , nextPositionY];
   }
   
-  this.ctx.drawImage(this.deadBombermanImage, this.posX*32, this.posY*32, 32, 32);
+  addBombsAvailable  (){
+  
+    this.bombsAvailable++;
+  }
+  
+  reduceBombsAvailable  (){    //TODO: REMOVE IT?
+  
+    this.bombsAvailable--;
+  }
+  
+  addBombsRange  (){
+  
+    this.rangeBombs++;
+  }
+  
+  print  () {
+  
+    this.ctx.drawImage(this.bombermanImage, this.posX*32, this.posY*32, 32, 32);
+  }
+  
+  printDead  (causeOfDeath) {
+    
+    if(causeOfDeath === 'fire'){
+  
+      this.ctx.drawImage(this.fireImage, this.posX*32, this.posY*32, 32, 32);
+    }
+    else{
+  
+      this.ctx.drawImage(this.groundImage, this.posX*32, this.posY*32, 32, 32);
+    }
+    
+    this.ctx.drawImage(this.deadBombermanImage, this.posX*32, this.posY*32, 32, 32);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
